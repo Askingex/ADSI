@@ -1,5 +1,5 @@
 import express from 'express'
-import cors from 'Cors'
+import cors from 'cors'
 import { dbConnection } from '../database/config.js'
 
 class Server{
@@ -30,7 +30,7 @@ class Server{
 
     listen(){
         this.app.listen(this.port,()=>{
-            console.log('servidor corriendo en el puerto ${this.port}');
+            console.log(`servidor corriendo en el puerto ${this.port}`);
         })
 
     }

@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import { dbConnection } from '../database/config.js'
 import categoria from '../routes/categoria.js'
+import usuario from '../routes/usuario.js'
 
 class Server{
     constructor(){
@@ -27,6 +28,7 @@ class Server{
 
     routes(){
         this.app.use('/api/categoria',categoria)
+        this.app.use('/api/usuario',usuario)
     }
 
     listen(){

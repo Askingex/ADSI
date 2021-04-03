@@ -3,9 +3,9 @@ import {usuarioGet, usuarioGetById, usuarioPost, usuarioPut,usuarioPutActivar,us
 
 const router = Router();
 
-router.get('/',usuarioGetById)
+router.get('/',usuarioGet)
 
-router.get('/:id',usuarioGet)
+router.get('/:id',usuarioGetById)
 
 router.post('/',usuarioPost)
 

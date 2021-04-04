@@ -1,26 +1,71 @@
-import {Router} from 'express'
-import {usuarioGet, usuarioGetById, usuarioPost, usuarioPut,usuarioPutActivar,usuarioPutDesactivar,usuarioDelete,login} from '../controllers/usuario.js'
+import { Router } from 'express'
+import { check } from 'express-validator';
+import { usuarioGet, usuarioGetById, usuarioPost, usuarioPut, usuarioPutActivar, usuarioPutDesactivar, usuarioDelete, login } from '../controllers/usuario.js'
+import { existeUsuarioById, existeUsuarioByNombre } from '../helpers/db-usuario.js';
+import validarCampos from '../middlewares/validar-campos.js';
+import { validarRol } from '../middlewares/validar-rol.js';
+import { validarJWT } from '../middlewares/validar-token.js';
 
 const router = Router();
 
-router.get('/',usuarioGet)
+router.get('/', [
+    validarJWT,
+    validarRol('ALMACINISTA_ROL'),
+    validarCampos
+], usuarioGet)
 
-router.get('/:id',[
-    // check('id','No es ID valido').isMongoId(),
-    // check('id').custom(existeCategoriaById),
-    // validarCampos
-],usuarioGetById)
+router.get('/:id', [
+    validarJWT,
+    check('id', 'No es ID valido').isMongoId(),
+    check('id').custom(existeUsuarioById),
+    validarCampos
+], usuarioGetById)
 
-router.post('/',usuarioPost)
+router.post('/', [
+    validarJWT,
+    validarRol('ALMACENISTA_ROL'),
+    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('nombre').custom(existeUsuarioByNombre),
+    validarCampos
+], usuarioPost)
 
-router.post('/login',login)
+router.post('/login', [
+    validarJWT,
+    validarRol('ALMACINISTA_ROL'),
+    validarCampos
+], login)
 
-router.put('/:id',usuarioPut) 
+router.put('/:id', [
+    validarJWT,
+    validarRol('ALMACENISTA_ROL'),
+    check('id', 'No es ID valido').isMongoId(),
+    check('id').custom(existeUsuarioById),
+    check('nombre').custom(existeUsuarioByNombre),
+    validarCampos
+], usuarioPut)
 
-router.put('/activar/:id',usuarioPutActivar) 
+router.put('/activar/:id', [
+    validarJWT,
+    validarRol('ALMACENISTA_ROL'),
+    check('id', 'No es ID valido').isMongoId(),
+    check('id').custom(existeUsuarioById),
+    validarCampos
+], usuarioPutActivar)
 
-router.put('/desactivar/:id',usuarioPutDesactivar) 
+router.put('/desactivar/:id', [
+    validarJWT,
+    validarRol('ALMACENISTA_ROL'),
+    check('id', 'No es un ID valido').isMongoId(),
+    check('id').custom(existeUsuarioById),
+    validarCampos
+], usuarioPutDesactivar)
 
-router.delete('/:id',usuarioDelete)
+router.delete('/:id', [
+    validarJWT,
+    validarRol('ALMACENISTA_ROL'),
+    check('id', 'No es ID valido').isMongoId(),
+    check('id').custom(existeUsuarioById),
+    validarCampos
+], usuarioDelete)
 
 export default router;

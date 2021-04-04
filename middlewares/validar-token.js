@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken'
-import { usuarioGet } from '../controllers/usuario.js';
 import Usuario from '../models/usuario.js';
 
 

@@ -1,5 +1,5 @@
 import bcryptjs from 'bcryptjs'
-import { generarJWT } from '../middlewares/validar.token.js';
+import { generarJWT } from '../middlewares/validar-token.js';
 import Usuario from '../models/usuario.js'
 
 const usuarioGet = async (req, res) => {

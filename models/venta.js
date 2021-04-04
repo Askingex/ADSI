@@ -1,10 +1,16 @@
-// import mongoose from "mongoose"; 
+import mongoose from "mongoose"; 
 
-// const categoriaSchema=mongoose.Schema({
-//     nombre:{type:String, require:true,maxlength:50,unique:true},
-//     descripcion:{type:String, maxlength:255},
-//     estado:{type:Number, default:1},
-//     createdAt:{type:Date, default:Date.now}  
-// }) 
+const ventaSchema=mongoose.Schema({
+    usuario:(usuarioSchema),
+    persona:(personaSchema),
+    tipocomprobante:{type:String, require:true,maxlength:50,unique:true},
+    seriecomprobante:{type:String},
+    numcomprobante:{type:String},
+    impuesto:{type:Number},
+    total:{type:Number},
+    descripcion:(articuloSchema),
+    estado:{type:Number, default:1},
+    createdAt:{type:Date, default:Date.now}   
+}) 
 
-// export default mongoose.model('categoria',categoriaSchema)
+export default mongoose.model('venta',ventaSchema)

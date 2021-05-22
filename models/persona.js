@@ -1,17 +1,15 @@
-import mongoose from "mongoose"; 
+import mongoose from "mongoose";
 
-const personaaSchema=mongoose.Schema({
-    tipopersona:{type:String,require:true,maxlength:20},
-    nombre:{type:String, require:true,maxlength:60},
-    tipodocumento:{type:String},
-    numdocumento:{type:String},
-    direccion:{type:String},
-    telefono:{type:String},
-    email:{type:String, maxlength:70,unique:true},
-    password:{type:String,required:true},
-    rol:{type:String,required:true,maxlength:15},
+const personaSchema = mongoose.Schema({
+    tipopersona: { type: String, require: true, maxlength: 20 },
+    nombre: { type: String, maxlength: 50, unique: true },
+    tipodocumento: { type: String, require: true, maxlength: 20 },
+    numdocumento: { type: String, maxlength: 20 },
+    direccion: { type: String, maxlength: 70 },
+    telefono: { type: String, maxlength: 20 },
+    email: { type: String, maxlength: 50, unique:true },
     estado:{type:Number, default:1},
-    createdAt:{type:Date, default:Date.now} 
-}) 
+    createdAt: { type: Date, default: Date.now }
+})
 
-export default mongoose.model('persona',personaSchema)
+export default mongoose.model('Persona', personaSchema)

@@ -2,9 +2,9 @@ import { Router } from 'express'
 import { check } from 'express-validator'
 import { articuloDelete, articuloGet, articuloGetById, articuloPost, articuloPut, articuloPutActivar, articuloPutDesactivar } from '../controllers/articulo.js'
 import { existeArticuloById, existeArticuloByNombre } from '../helpers/db-articulo.js'
-import validarCampos from '../middlewares/validar-campos';
+import validarCampos from '../middlewares/validar-campos.js';
 import { validarRol } from '../middlewares/validar-rol.js';
-import { validarJWT } from '../middlewares/validar-token';
+import { validarJWT } from '../middlewares/validar-token.js';
 
 
 const router = Router();

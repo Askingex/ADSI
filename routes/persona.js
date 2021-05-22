@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { check } from 'express-validator'
-import { personaDelete, personaGet, personaGetById, personaPost, personaPut, personaPutActivar, personaPutDesactivar } from '../controllers/persona.js'
+import { personaDelete, personaGet, personaGetById, personaPost, personaPut, personaPutActivar, personaPutDesactivar,personaGetProveedores,personaGetClientes } from '../controllers/persona.js'
 import { existePersonaById, existePersonaByNombre } from '../helpers/db-persona.js'
 import validarCampos from '../middlewares/validar-campos.js';
 import { validarRol } from '../middlewares/validar-rol.js';
@@ -14,6 +14,16 @@ router.get('/', [
     validarRol('ALMACENISTA_ROL'),
     validarCampos
 ], personaGet)
+router.get('/proveedores', [
+    validarJWT,
+    validarRol('ALMACENISTA_ROL'),
+    validarCampos
+], personaGetProveedores)
+router.get('/clientes', [
+    validarJWT,
+    validarRol('ALMACENISTA_ROL'),
+    validarCampos
+], personaGetClientes)
 
 router.get('/:id', [
     validarJWT,

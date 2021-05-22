@@ -1,6 +1,6 @@
 import mongoose from "mongoose"; 
 
-const UsuarioSchema=mongoose.Schema({
+const usuarioSchema=mongoose.Schema({
     nombre:{type:String, require:true,maxlength:60},
     email:{type:String, maxlength:70,unique:true},
     password:{type:String,required:true},
@@ -10,4 +10,4 @@ const UsuarioSchema=mongoose.Schema({
     // ADMIN_ROL   ALMACENISTA_ROL   VENDEDOR_ROL 
 }) 
 
-export default mongoose.model('Usuario',UsuarioSchema)
+export default mongoose.model('Usuario',usuarioSchema)

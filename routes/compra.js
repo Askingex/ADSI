@@ -27,8 +27,6 @@ router.get('/:id', [
 router.post('/', [
     validarJWT,
     validarRol('ALMACENISTA_ROL'),
-    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    check('nombre').custom(existeCompraByNombre),
     validarCampos
 ], compraPost)
 

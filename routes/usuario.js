@@ -29,11 +29,7 @@ router.post('/', [
     validarCampos
 ], usuarioPost)
 
-router.post('/login', [
-    validarJWT,
-    validarRol('ALMACINISTA_ROL'),
-    validarCampos
-], login)
+router.post('/login',login)
 
 router.put('/:id', [
     validarJWT,

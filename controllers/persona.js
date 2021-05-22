@@ -3,12 +3,29 @@ import Persona from '../models/persona.js'
 const personaGet=async(req,res)=>{
     const {value}=req.query;
         const persona = await Persona 
-             .find({
-                 $or:[
-                     {nombre:new RegExp(value,'i')},
-                     {descripcion:new RegExp(value,'i')}
-                 ]
-             })
+             .find()
+             .sort({"createAt":-1})
+
+    res.json({
+        persona
+    })  
+}
+
+const personaGetClientes=async(req,res)=>{
+    const {value}=req.query;
+        const persona = await Persona 
+             .find({tipopersona:"cliente"})
+             .sort({"createAt":-1})
+
+    res.json({
+        persona
+    })  
+}
+
+const personaGetProveedores=async(req,res)=>{
+    const {value}=req.query;
+        const persona = await Persona 
+             .find({tipopersona:"proveedor"})
              .sort({"createAt":-1})
 
     res.json({
@@ -26,9 +43,9 @@ const personaGetById=async(req,res)=>{
 }
 
 const personaPost=async(req,res)=>{
-    const {nombre,descripcion}=req.body;
+    const {tipopersona,nombre,tipodocumento,numdocumento,direccion,telefono,email}=req.body;
     
-    const persona = new Persona ({nombre,descripcion})
+    const persona = new Persona ({tipopersona,nombre,tipodocumento,numdocumento,direccion,telefono,email})
 
     await  persona.save();
 
@@ -72,5 +89,5 @@ const personaDelete=async(req,res)=>{
     })
 }
 
-export {personaGet,personaGetById,personaPost,personaPut,personaPutActivar,personaPutDesactivar,personaDelete}
+export {personaGet,personaGetById,personaPost,personaPut,personaPutActivar,personaPutDesactivar,personaDelete,personaGetClientes,personaGetProveedores}
 
